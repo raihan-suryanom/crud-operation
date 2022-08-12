@@ -1,32 +1,18 @@
-import {
-  CartesianGrid,
-  Line,
-  LineChart,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from 'recharts';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Navbar } from './common/components';
+import { AddDataPage, DetailDataPage, EditDataPage, HomePage } from './pages';
 
 function App() {
-  const data = [
-    { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },
-    { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },
-    { name: 'Page A', uv: 300, pv: 400, amt: 200 },
-    { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },
-    { name: 'Page A', uv: 400, pv: 2400, amt: 2400 },
-  ];
-
   return (
-    <>
-      <LineChart width={500} height={200} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-      </LineChart>
-      <p>test</p>
-    </>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/add" element={<AddDataPage />} />
+        <Route path="/detail" element={<DetailDataPage />} />
+        <Route path="/edit" element={<EditDataPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
