@@ -1,8 +1,16 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Navbar } from './common/components';
+import { useDispatch } from 'react-redux';
+import { incrementAsync } from './features/post/postSlicer';
 import { AddDataPage, DetailDataPage, EditDataPage, HomePage } from './pages';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(incrementAsync());
+  }, [dispatch]);
+
   return (
     <BrowserRouter>
       <Navbar />

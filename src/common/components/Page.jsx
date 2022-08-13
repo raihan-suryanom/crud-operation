@@ -1,12 +1,8 @@
-import React from 'react';
+import { useState } from 'react';
 import Header from './Header';
 
-type User = {
-  name: string;
-};
-
-const Page: React.FC = () => {
-  const [user, setUser] = React.useState<User>();
+const Page = () => {
+  const [user, setUser] = useState();
 
   return (
     <article>

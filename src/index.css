@@ -7,4 +7,36 @@
   body {
     @apply bg-dark text-light;
   }
+  main {
+    @apply min-w-full min-h-screen py-10;
+  }
+
+  .pagination > button {
+    @apply border-primary border rounded-md p-0.5 min-w-[30px];
+  }
+  .pagination > button:hover {
+    @apply bg-primary text-dark;
+  }
+  .pagination > button:disabled {
+    @apply cursor-not-allowed;
+  }
+  .input {
+    @apply min-w-[340px] border border-primary bg-transparent outline-none rounded-md text-primary py-3 px-4 text-lg font-medium;
+  }
+
+  .input::placeholder {
+    @apply text-light;
+  }
+
+  .input[type='submit'] {
+    @apply cursor-pointer;
+  }
+
+  .input[type='submit']:hover {
+    @apply bg-primary text-dark font-bold;
+  }
+
+  .textarea {
+    @apply h-40 resize-none;
+  }
 }
