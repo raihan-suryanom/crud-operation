@@ -1,10 +1,15 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { usePagination, useTable } from 'react-table';
 import Button from '../../common/components/Button';
+import { updateData } from './postSlicer';
 
 const Post = () => {
+  const navigate = useNavigate();
   const { data, isLoading } = useSelector((state) => state.data);
+  const dispatch = useDispatch();
+
   const columns = useMemo(
     () => [
       {
@@ -16,8 +21,45 @@ const Post = () => {
       },
       { Header: 'User ID', accessor: 'userId' },
       { Header: 'Post Title', accessor: 'title' },
+      {
+        Header: 'Actions',
+        accessor: '',
+        Cell: ({ row }) => {
+          console.log(row);
+          const deleteAction = async (id) => {
+            const post = data.filter((i) => i.id !== id);
+            dispatch(updateData(post));
+          };
+
+          return (
+            <div className="flex items-center justify-between space-x-1.5 relative z-50">
+              <button
+                onClick={() => navigate('/edit')}
+                type="button"
+                className="bg-amber-500 p-0.5 rounded-sm"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => navigate(`/detail/${row.original.id}`)}
+                type="button"
+                className="bg-teal-500 p-0.5 rounded-sm"
+              >
+                Detail
+              </button>
+              <button
+                onClick={() => deleteAction(Number(row.original.id))}
+                type="button"
+                className="bg-red-500 p-0.5 rounded-sm"
+              >
+                Delete
+              </button>
+            </div>
+          );
+        },
+      },
     ],
-    []
+    [data, dispatch, navigate]
   );
   const {
     getTableProps,
@@ -51,7 +93,7 @@ const Post = () => {
 
   return (
     <>
-      <table {...getTableProps()} className="">
+      <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
@@ -67,10 +109,13 @@ const Post = () => {
           ))}
         </thead>
         <tbody {...getTableBodyProps()} className="text-center">
-          {page.map((row, i) => {
+          {page.map((row) => {
             prepareRow(row);
             return (
-              <tr {...row.getRowProps()}>
+              <tr
+                {...row.getRowProps()}
+                className="cursor-pointer hover:border-t hover:border-b hover:border-primary"
+              >
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}

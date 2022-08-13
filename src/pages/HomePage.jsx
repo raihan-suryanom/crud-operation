@@ -22,7 +22,7 @@ const HomePage = () => {
   return (
     <main className="flex flex-col items-center justify-start">
       <h1 className="text-center lg:text-4xl font-bold">
-        Test Coding PT. Infracom
+        Test Coding PT. Infracom Technology
       </h1>
       {isLoading ? (
         <div className="flex items-center justify-center w-full my-12 mx-auto px-10">

@@ -21,7 +21,7 @@
     @apply cursor-not-allowed;
   }
   .input {
-    @apply min-w-[340px] border border-primary bg-transparent outline-none rounded-md text-primary py-3 px-4 text-lg font-medium;
+    @apply min-w-[340px] border border-primary bg-transparent outline-none rounded-md text-primary py-1 px-4 text-lg font-medium;
   }
 
   .input::placeholder {
@@ -30,6 +30,10 @@
 
   .input[type='submit'] {
     @apply cursor-pointer;
+  }
+
+  .input:disabled {
+    @apply cursor-wait;
   }
 
   .input[type='submit']:hover {
